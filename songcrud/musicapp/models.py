@@ -39,7 +39,12 @@ class Song(models.Model):
 
 class Lyric(models.Model):
     content = models.TextField()
-    song_id = models.ForeignKey(Song, on_delete=models.CASCADE, related_name="song_ids", null=True)
+    song_id = models.ForeignKey(
+        Song, on_delete=models.CASCADE, related_name="song_ids", null=True)
+    
+    def __str__(self):
+        return str(self.song_id.title) + ' by ' + str(
+            self.song_id.artiste_id.first_name) + ' ' + str(self.song_id.artiste_id.last_name)
 
 
 
